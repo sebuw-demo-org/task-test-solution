@@ -51,10 +51,7 @@ jobs:
           REPO_NAME="test-task"
           git clone https://github.com/${{ github.actor }}/$REPO_NAME.git
           cd $REPO_NAME
-
-      - name: Clear existing contents (if any)
-        run: |
-          git rm -r .
+          pwd
       
       - name: Copy contents of dest_dir
         run: |
