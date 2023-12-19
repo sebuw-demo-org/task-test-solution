@@ -60,7 +60,7 @@ jobs:
         run: |
           pwd
           ls -alh
-          cp -r  .
+          cp -r task_repo/ .
 
       - name: Commit and push changes
         run: |
