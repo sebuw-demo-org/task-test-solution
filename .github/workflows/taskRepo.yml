@@ -50,7 +50,7 @@ jobs:
     - name: Copy task_repo and push to the repository
       run: |
         git clone --depth 1 https://${GH_TOKEN}@github.com/${USERNAME}/${REPO_NAME}.git dest_repo
-        cp -r student_repo/ dest_repo/
+        cp -r student_repo/* dest_repo/
         cd dest_repo
         pwd
         ls -alh
