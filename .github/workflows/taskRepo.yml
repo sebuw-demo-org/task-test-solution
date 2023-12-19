@@ -1,22 +1,37 @@
-name: Create and Copy Task Repo
+name: Genrate Student Repository
 
 on:
   push:
     branches:
-      - main
+      - main  
 
 jobs:
-  create-and-copy:
+  generate_student_repo:
+    name: Generate student repository
     runs-on: ubuntu-latest
 
     env:
-      GH_TOKEN: ${{ secrets.PAT_TOKEN }}
+      GH_TOKEN: ${{ secrets.PAT_TOKEN }} # FIXME: secret name
+      REPO_NAME: "student-repo" # FIXME
+      USERNAME: "sebuw" # FIXME: 
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Set up Git
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10' 
+    
+    - name: Install dependencies if any
+      run: |
+        python -m pip install --upgrade pip
+    
+    - name: Run Python script
+      run: python generate_task_repo.py
+
+    - name: Set up Git config
       run: |
         git config --global user.email "actions@github.com"
         git config --global user.name "GitHub Actions"
@@ -24,28 +39,26 @@ jobs:
     - name: Check if the repository exists
       id: check_repo
       run: |
-        REPO_NAME="your-private-repo"
-        gh repo view sebuw/${REPO_NAME} || echo "::set-output name=exists::false"
+        gh repo view ${USERNAME}/${REPO_NAME} || echo "::set-output name=exists::false"
 
     - name: Create repository if it doesn't exist
       id: create_repo
       if: steps.check_repo.outputs.exists == 'false'
       run: |
-        REPO_NAME="your-private-repo"
-        gh repo create sebuw/${REPO_NAME} --private
+        gh repo create ${USERNAME}/${REPO_NAME} --private
 
     - name: Copy task_repo and push to the repository
       run: |
-        REPO_NAME="your-private-repo"
-        DEST_REPO_URL="https://github.com/sebuw/${REPO_NAME}.git"
-        git clone --depth 1 https://${GH_TOKEN}@github.com/sebuw/${REPO_NAME}.git cloned_repo
-        cp -r src/ cloned_repo/
-        cd cloned_repo
+        git clone --depth 1 https://${GH_TOKEN}@github.com/${USERNAME}/${REPO_NAME}.git dest_repo
+        cp -r student_repo/ dest_repo/
+        cd dest_repo
         pwd
         ls -alh
         git add .
         git commit -m "Initialized student repository"
-        git push
+        git push -f origin main
+        # git push destination --all
+        # git push destination --tags
     - name: Cleanup
       run: |
-        rm -rf cloned_repo
+        rm -rf dest_repo

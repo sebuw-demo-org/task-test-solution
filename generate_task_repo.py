@@ -30,7 +30,7 @@ def task_repo(src_dir, dest_dir, ignore_list):
         
 if __name__ == "__main__":
   src_dir = os.path.join(os.getcwd())
-  dest_dir = os.path.join(os.getcwd(), "task_repo")
+  dest_dir = os.path.join(os.getcwd(), "student_repo")
   ignore_list = ['.git', '.gradle', 'generate_task_repo.py']
   print(dest_dir)
   task_repo(src_dir, dest_dir, ignore_list)
