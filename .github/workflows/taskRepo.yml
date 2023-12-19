@@ -46,17 +46,16 @@ jobs:
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
 
-      - name: Clone newly created repository
+      - name: Clone or initialize repository
         run: |
-          REPO_NAME="test-task"
-          git clone https://github.com/${{ github.actor }}/$REPO_NAME.git
-          cd $REPO_NAME
-          pwd
-      
-      - name: Initialize and configure git
-        run: |
-          git init
-          git remote add origin https://github.com/${{ github.actor }}/test-task.git
+          if [ -z "$(ls -A .)" ]; then
+            git clone https://github.com/${{ github.actor }}/test-task.git .
+          else
+            git init
+            git remote add origin https://github.com/${{ github.actor }}/test-task.git
+            git fetch
+            git checkout -t origin/main
+          fi
       
       - name: Copy contents of dest_dir
         run: |
