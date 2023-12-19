@@ -53,12 +53,17 @@ jobs:
           cd $REPO_NAME
           pwd
       
+      - name: Initialize and configure git
+        run: |
+          git init
+          git remote add origin https://github.com/${{ github.actor }}/test-task.git
+      
       - name: Copy contents of dest_dir
         run: |
           pwd
           ls -alh
           REPO_NAME="test-task"
-          cp -r ../task_repo/ $REPO_NAME
+          cp -r task_repo/ $REPO_NAME
 
       - name: Commit and push changes
         run: |
