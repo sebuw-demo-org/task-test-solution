@@ -43,9 +43,9 @@ jobs:
         cd cloned_repo
         pwd
         ls -alh
-        git remote add destination ${DEST_REPO_URL/https:\/\/${GH_TOKEN}@/https:\/\/}
-        git push destination --all
-        git push destination --tags
+        git add .
+        git commit -m "Initialized student repository"
+        git push
     - name: Cleanup
       run: |
         rm -rf cloned_repo
