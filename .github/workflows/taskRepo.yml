@@ -57,7 +57,8 @@ jobs:
         run: |
           pwd
           ls -alh
-          cp -r task_repo/ .
+          REPO_NAME="test-task"
+          cp -r task_repo/ $REPO_NAME
 
       - name: Commit and push changes
         run: |
