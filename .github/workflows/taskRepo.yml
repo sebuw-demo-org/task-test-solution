@@ -55,7 +55,7 @@ jobs:
         pwd
         ls -alh
         git add .
-        git commit -m "Initialized student repository"
+        git commit -m ":tada:Initialized student repository"
         git push -f origin main
         # git push destination --all
         # git push destination --tags
