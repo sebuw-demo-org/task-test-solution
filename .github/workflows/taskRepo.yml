@@ -39,13 +39,7 @@ jobs:
         REPO_NAME="your-private-repo"
         DEST_REPO_URL="https://github.com/sebuw/${REPO_NAME}.git"
         git clone --depth 1 https://github.com/sebuw/${REPO_NAME}.git cloned_repo
-        cp -r src/ cloned_repo/
-        cd cloned_repo
-        pwd
-        ls -alh
-        git remote add destination ${DEST_REPO_URL}
-        git push destination --all
-        git push destination --tags
+        
 
     - name: Cleanup
       run: |
