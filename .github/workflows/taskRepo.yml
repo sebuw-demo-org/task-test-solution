@@ -46,7 +46,7 @@ jobs:
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
 
-       - name: Clone newly created repository
+      - name: Clone newly created repository
         run: |
           git clone https://github.com/${{ github.actor }}/$REPO_NAME.git
           cd $REPO_NAME
