@@ -1,0 +1,44 @@
+{
+  "tests": [
+    {
+      "name": "Task 1: Alloy Checker Dead Signatures",
+      "setup": "chmod +x gradlew",
+      "run": "./gradlew test --tests 'AlloyCheckerDeadTest' --console=rich",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "Task 2: Alloy Checker Core Signatures",
+      "setup": "chmod +x gradlew",
+      "run": "./gradlew test --tests 'AlloyCheckerCoreTest' --console=rich",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "Task 3: Alloy Checker Minimum Scope",
+      "setup": "chmod +x gradlew",
+      "run": "./gradlew test --tests 'AlloyCheckerMinScopeTest' --console=rich",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "All tests",
+      "setup": "chmod +x gradlew",
+      "run": "./gradlew test",
+      "input": "",
+      "output": "",
+      "comparison": "excluded",
+      "timeout": 15,
+      "points": 0
+    }
+  ]
+}
