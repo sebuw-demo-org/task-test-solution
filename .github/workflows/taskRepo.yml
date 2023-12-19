@@ -22,21 +22,20 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt  # If you have any dependencies
-
+      
       - name: Run Python script
         run: python generate_task_repo.py  # Replace with your actual script name
 
       - name: Check if repository exists
         run: |
-          REPO_NAME="se-buw/test-task-repo"
+          REPO_NAME="sebuw/test-task"
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" -u ${{ secrets.PAT_TOKEN }} https://api.github.com/repos/$REPO_NAME)
           
           if [ $STATUS -eq 200 ]; then
             echo "Repository exists."
           else
             echo "Repository does not exist. Creating..."
-            curl -u ${{ secrets.PAT_TOKEN }} -H "Accept: application/vnd.github.v3+json" -d '{"name":"test-task-repo"}' https://api.github.com/user/repos
+            curl -u ${{ secrets.PAT_TOKEN }} -H "Accept: application/vnd.github.v3+json" -d '{"name":"test-task"}' https://api.github.com/user/repos
           fi
 
       - name: Set up Git user

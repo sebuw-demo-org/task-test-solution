@@ -11,7 +11,7 @@ jobs:
   build:
     name: FM4SE | Alloy Signature Checker
     runs-on: ubuntu-latest
-    if: github.actor != 'github-classroom[bot]'
+    if: github.actor == 'github-classroom[bot]'
     steps:
       - name: Checkout Starter Code
         uses: actions/checkout@v4
