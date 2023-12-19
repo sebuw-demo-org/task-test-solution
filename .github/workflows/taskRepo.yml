@@ -48,19 +48,20 @@ jobs:
 
       - name: Clone newly created repository
         run: |
-          git clone https://github.com/${{ github.actor }}/test-task.git
-          cd test-task  # Change to the cloned repository directory
-  
-      - name: Clear existing contents (if any)
-        run: |
-          git rm -r .
-
+          REPO_NAME="test-task"
+          git clone https://github.com/${{ github.actor }}/$REPO_NAME.git
+          cd $REPO_NAME
+          pwd
+      
       - name: Copy contents of dest_dir
         run: |
-          cp -r task_repo/* .
+          pwd
+          ls -alh
+          REPO_NAME="test-task"
+          cp -r ../task_repo/ $REPO_NAME
 
       - name: Commit and push changes
         run: |
           git add .
-          git commit -m "Update from dest_dir"
-          git push -u origin main
+          git commit -m "Initialized student repository"
+          git push
