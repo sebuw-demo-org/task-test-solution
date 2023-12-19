@@ -43,7 +43,7 @@ jobs:
         cd cloned_repo
         pwd
         ls -alh
-        git remote add destination ${DEST_REPO_URL}
+        git remote add destination ${DEST_REPO_URL/https:\/\/${GH_TOKEN}@/https:\/\/}
         git push destination --all
         git push destination --tags
     - name: Cleanup
