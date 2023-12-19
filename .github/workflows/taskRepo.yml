@@ -3,7 +3,7 @@ name: Copy Task to Private Repo
 on:
   push:
     branches:
-      - main  # Change this to your default branch name
+      - main
 
 jobs:
   copy-task:
@@ -21,18 +21,20 @@ jobs:
     - name: Check if private repo exists
       id: check_repo
       run: |
-        REPO_NAME="your-private-repo"  # Change this to your desired private repo name
+        REPO_NAME="your-private-repo"
         gh repo view $REPO_NAME || echo "::set-output name=repo_exists::false"
 
     - name: Create private repo if not exists
       if: steps.check_repo.outputs.repo_exists == 'false'
       run: |
-        REPO_NAME="your-private-repo"  # Change this to your desired private repo name
+        REPO_NAME="your-private-repo"
         gh repo create $REPO_NAME --private
         echo "::set-output name=repo_url::$(gh repo view $REPO_NAME --json html_url --template '{{.html_url}}')"
 
     - name: Copy and push task_repo to private repo
+      env:
+        GH_TOKEN: ${{ secrets.PAT_TOKEN }}
       run: |
-        REPO_NAME="your-private-repo"  # Change this to your desired private repo name
+        REPO_NAME="your-private-repo"
         git remote add private_repo ${{ steps.check_repo.outputs.repo_url }}
         git push private_repo HEAD:main
